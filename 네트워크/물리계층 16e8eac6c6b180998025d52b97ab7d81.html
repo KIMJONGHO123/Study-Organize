@@ -1,0 +1,699 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>물리계층</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="16e8eac6-c6b1-8099-8025-d52b97ab7d81" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/solid_beige.png" style="object-position:center 40%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🌱</span></div><h1 class="page-title">물리계층</h1><p class="page-description"></p></header><div class="page-body"><p id="16e8eac6-c6b1-801c-86c3-c8468379e4ed" class="">
+</p><h2 id="16e8eac6-c6b1-8042-8300-e21c46b932e0" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle mathcolor="#F2635A"><mn>1.</mn><mtext>물리계층</mtext><mo stretchy="false">(</mo><mi>P</mi><mi>h</mi><mi>y</mi><mi>s</mi><mi>i</mi><mi>c</mi><mi>a</mi><mi>l</mi><mi>L</mi><mi>a</mi><mi>y</mi><mi>e</mi><mi>r</mi><mo stretchy="false">)</mo></mstyle></mrow><annotation encoding="application/x-tex">\color{F2635A}1. 물리계층(Physical Layer)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord" style="color:#F2635A;">1.</span><span class="mord hangul_fallback" style="color:#F2635A;">물리계층</span><span class="mopen" style="color:#F2635A;">(</span><span class="mord mathnormal" style="margin-right:0.13889em;color:#F2635A;">P</span><span class="mord mathnormal" style="color:#F2635A;">h</span><span class="mord mathnormal" style="color:#F2635A;">ys</span><span class="mord mathnormal" style="color:#F2635A;">i</span><span class="mord mathnormal" style="color:#F2635A;">c</span><span class="mord mathnormal" style="color:#F2635A;">a</span><span class="mord mathnormal" style="margin-right:0.01968em;color:#F2635A;">l</span><span class="mord mathnormal" style="color:#F2635A;">L</span><span class="mord mathnormal" style="color:#F2635A;">a</span><span class="mord mathnormal" style="margin-right:0.02778em;color:#F2635A;">yer</span><span class="mclose" style="color:#F2635A;">)</span></span></span></span></span><span>﻿</span></span> </h2><p id="16e8eac6-c6b1-8041-8347-e9573c1d7df4" class=""> (OSI 7계층 확인할려면 이 링크로 따라가세요)</p><h3 id="16e8eac6-c6b1-8009-a583-c528525a6366" class="">역할</h3><ul id="16e8eac6-c6b1-8035-817f-d730dae402ad" class="bulleted-list"><li style="list-style-type:disc">물리적 연결 제공 : 네트워크 장비 간의 실제 물리적 연결을 설정합니다.</li></ul><ul id="16e8eac6-c6b1-8034-910c-e1609d63a8c2" class="bulleted-list"><li style="list-style-type:disc">전기적/광학적 신호 전달 : 데이터를 전기 신호 또는 광 신호로 변환하여 전달합니다.</li></ul><p id="16e8eac6-c6b1-80ea-b3e9-cf0cd1adca42" class="">
+</p><h3 id="16e8eac6-c6b1-80b0-9e14-c85c2f4e3b6c" class="">목적</h3><ul id="16e8eac6-c6b1-8026-afd6-d355e9e41343" class="bulleted-list"><li style="list-style-type:disc">데이터의 전송의 기초 제공 : 상위 계층이 데이터 통신을 수행할 수 있도록 안정적이고 효율적인 물리적 매체로 제공합니다.</li></ul><ul id="16e8eac6-c6b1-80c5-bcde-ea829b0c33d2" class="bulleted-list"><li style="list-style-type:disc">호환성 보장 : 다양한 장치와 매체 간의 호환성을 유지하여 네트워크의 확장성을 지원합니다.</li></ul><p id="16e8eac6-c6b1-80ad-a67e-cb13de35ea40" class="">
+</p><h3 id="16e8eac6-c6b1-8046-b7d4-fa955c662a66" class="">관련 장치</h3><ul id="16e8eac6-c6b1-8039-9119-ff3701a1fd67" class="bulleted-list"><li style="list-style-type:disc">케이블 <ul id="16e8eac6-c6b1-805f-8108-f3863787a22e" class="bulleted-list"><li style="list-style-type:circle">동축 케이블 : 높은 대역폭과 내간섭성을 제공, 주로 케이블 TV와 일부 네트워크에 사용</li></ul><ul id="16e8eac6-c6b1-8066-ab4b-ccb0a1e17ea6" class="bulleted-list"><li style="list-style-type:circle">광섬유 케이블 : 광 신호를 사용하여 장거리 및 고속 데이터 전송 가능.</li></ul><p id="16e8eac6-c6b1-80fc-aba5-f32ddf30aea0" class="">
+</p></li></ul><ul id="16e8eac6-c6b1-80ec-bdb0-c5a321e367bd" class="bulleted-list"><li style="list-style-type:disc">리피터<ul id="16e8eac6-c6b1-80c0-adee-c8e86841494c" class="bulleted-list"><li style="list-style-type:circle">기능 : 약해진 신호를 증폭하고 재생하여 신호의 전송 거리를 연장</li></ul><ul id="16e8eac6-c6b1-80ea-8938-d7c69dc51aad" class="bulleted-list"><li style="list-style-type:circle">용도 : 장거리 네트워크 연결 시 신호 감쇠 보상.</li></ul></li></ul><p id="16e8eac6-c6b1-80eb-bb25-cfd38568ee0d" class="">
+</p><ul id="16e8eac6-c6b1-8081-90e1-dca5f7e0272f" class="bulleted-list"><li style="list-style-type:disc">허브<ul id="16e8eac6-c6b1-80c7-afde-f3c7cbd8a60f" class="bulleted-list"><li style="list-style-type:circle">기능 : 네트워크 장치들을 물리적으로 연결하고 데이터 패킷을 모든 포트로 전송</li></ul><ul id="16e8eac6-c6b1-8099-8996-c3a550a441a1" class="bulleted-list"><li style="list-style-type:circle">특징 : 데이터 전송 시 충돌 가능성이 존재한다.</li></ul></li></ul><ul id="16e8eac6-c6b1-8071-bdbc-c021f84e43df" class="bulleted-list"><li style="list-style-type:disc">RJ45 커넥터<ul id="16e8eac6-c6b1-80bb-95a0-de6980efb297" class="bulleted-list"><li style="list-style-type:circle">기능 : 이더넷 케이블에 사용되는 8딘 모듈러 커넥터.</li></ul><ul id="16e8eac6-c6b1-8006-8151-cd39a8bf95e6" class="bulleted-list"><li style="list-style-type:circle">특징 : 다양한 네트워크 장비에서 호환 가능.</li></ul></li></ul><p id="16e8eac6-c6b1-80ed-865f-f0b6767aebd0" class="">
+</p><h3 id="16e8eac6-c6b1-80b4-a0f9-fcdfa97400b3" class="">프로토콜</h3><p id="16e8eac6-c6b1-807b-87e1-d7e5f2682909" class="">전기적 신호 전달(PUD : Physical Unit of Data)<div class="indented"><ul id="16e8eac6-c6b1-80eb-bca7-c5655654d3af" class="bulleted-list"><li style="list-style-type:disc">비트 단위 전송 : 데이터는 비트 스트림 형태로 전송되며, 각 비트는 전기적 또는 광학적 신호로 표현.</li></ul><ul id="16e8eac6-c6b1-80ab-aaa0-efa04547eefe" class="bulleted-list"><li style="list-style-type:disc">표준 프로토콜 : <ul id="16e8eac6-c6b1-8081-a2ba-e17ad0c42c52" class="bulleted-list"><li style="list-style-type:circle">Ethernet : 가장 널리 사용되는 유선 네트워크 표준.</li></ul><ul id="16e8eac6-c6b1-80e4-932d-e2a58061e96f" class="bulleted-list"><li style="list-style-type:circle">Wi-Fi : 무선 네트워크 표준.</li></ul></li></ul></div></p><p id="16e8eac6-c6b1-8011-a78d-e1d6b090f8f6" class="">
+</p><h2 id="16e8eac6-c6b1-8069-9977-c26c54579718" class="">2. 케이블</h2><h3 id="16e8eac6-c6b1-80f2-a7a7-fdf38229f31e" class="">정의</h3><ul id="16e8eac6-c6b1-8097-bbff-fa6d0a60127d" class="bulleted-list"><li style="list-style-type:disc">케이블은 전기 신호 또는 광 신호를 통해 데이터를 전달하는 물리적 매체입니다. 다양한 종류의 케이블이 존재하며, 각각의 특성에 따라 사용 용도가 다릅니다.</li></ul><p id="16e8eac6-c6b1-80c9-865d-ff97c090ecd4" class="">
+</p><h3 id="16e8eac6-c6b1-808b-95b9-fd150eaad828" class="">목적</h3><ul id="16e8eac6-c6b1-8076-a684-e7df78889196" class="bulleted-list"><li style="list-style-type:disc">데이터 전송 : 장치 간 데이터 통신을 가능하게 합니다.</li></ul><ul id="16e8eac6-c6b1-809f-8b23-e55cfcb4b3c7" class="bulleted-list"><li style="list-style-type:disc">신호 무결성 유지 : 전송 중 신호의 왜곡이나 감쇠를 최소화 합니다.</li></ul><ul id="16e8eac6-c6b1-80e8-a092-ebd0e1c050dc" class="bulleted-list"><li style="list-style-type:disc">보안 : 물리적 매체를 통한 데이터 전송은 무단 접근을 방지할 수 있습니다.</li></ul><h3 id="16e8eac6-c6b1-800f-bf64-f6a78ad98070" class="">종류</h3><ul id="16e8eac6-c6b1-80fe-ac00-c69fe4ee7ac6" class="bulleted-list"><li style="list-style-type:disc">동축 케이블<ul id="16e8eac6-c6b1-80a0-9a50-d369db8903a4" class="bulleted-list"><li style="list-style-type:circle">구성 :  중심 도체, 절연체, 차폐층, 외피로 구성.</li></ul><ul id="16e8eac6-c6b1-80af-bbc4-f87e1487f627" class="bulleted-list"><li style="list-style-type:circle">특징 : 높은 내간섭성, 장거리 전송에 적합하다.</li></ul></li></ul><p id="16e8eac6-c6b1-80cb-8064-c2b87524a224" class="">
+</p><ul id="16e8eac6-c6b1-80e2-be3b-cee126b6d0e4" class="bulleted-list"><li style="list-style-type:disc">광섬유 케이블<ul id="16e8eac6-c6b1-80cd-a331-d3f6d0eca740" class="bulleted-list"><li style="list-style-type:circle">구성 : 코어, 클래딩, 보호 코팅을 구성.</li></ul><ul id="16e8eac6-c6b1-8095-aaaa-e7e1f8982c25" class="bulleted-list"><li style="list-style-type:circle">특징 : 초고속 데이터 전송, 장거리 전송 가능, 전자기 간섭 없음.</li></ul><ul id="16e8eac6-c6b1-80c7-a36b-c4d2cad58de6" class="bulleted-list"><li style="list-style-type:circle">용도 : 장거리 인터넷 연결, 데이터 센터</li></ul></li></ul><p id="16e8eac6-c6b1-805a-becf-c8fc345a0e4e" class="">
+</p><ul id="16e8eac6-c6b1-8073-9ac2-c7ff8fae753c" class="bulleted-list"><li style="list-style-type:disc">광대역 케이블<ul id="16e8eac6-c6b1-80bd-b27f-d21c7dc38954" class="bulleted-list"><li style="list-style-type:circle">특징 : 여러 주파수 대역을 동시에 전송 가능.</li></ul><ul id="16e8eac6-c6b1-80f5-8819-d16952ec2697" class="bulleted-list"><li style="list-style-type:circle">용도 : 털레비전, 인터넷, 전화 서비스 통합.</li></ul></li></ul><h2 id="16e8eac6-c6b1-80f8-b1cf-c7593fde886b" class="">3. LAN 케이블 종류</h2><h3 id="16e8eac6-c6b1-808a-a28a-efae074ad1c8" class="">주요 유형</h3><ul id="16e8eac6-c6b1-809f-95a6-fd6eb61acd28" class="bulleted-list"><li style="list-style-type:disc">UTP (Unshielded Twisted Pair)<ul id="16e8eac6-c6b1-80c0-adc6-f807f265259a" class="bulleted-list"><li style="list-style-type:circle">설명 : 비차폐 트위스티드 페어 케이블로, 경제적이고 유연성이 높음.</li></ul><ul id="16e8eac6-c6b1-8046-ad4c-da7af1b7240f" class="bulleted-list"><li style="list-style-type:circle">카테고리 : <ul id="16e8eac6-c6b1-807a-a5cc-cbbfb5a3c8c1" class="bulleted-list"><li style="list-style-type:square">Cat5e : 최대 1Gbps, 100미터 전송 거리.</li></ul><ul id="16e8eac6-c6b1-802c-b198-fccfc5bb078b" class="bulleted-list"><li style="list-style-type:square">Cat6 : 최대 10Gbps, 55미터 전송 거리.</li></ul><ul id="16e8eac6-c6b1-80b4-8398-d050c4f54686" class="bulleted-list"><li style="list-style-type:square">Cat6a : 최대 10Gbps, 100미터 전송 거리.</li></ul><ul id="16e8eac6-c6b1-8029-8c91-c83de1e56a8f" class="bulleted-list"><li style="list-style-type:square">Cat7 : 최대 10Gbps, 강화된 차폐 제공.</li></ul></li></ul><ul id="16e8eac6-c6b1-803e-ba7b-ce244cd12abe" class="bulleted-list"><li style="list-style-type:circle">용도 : 이더넷 네트워크, 홈 네트워킹.</li></ul></li></ul><p id="16e8eac6-c6b1-808f-bbb4-e255dffb9b19" class="">
+</p><ul id="16e8eac6-c6b1-8026-8d00-f62ebcacca8e" class="bulleted-list"><li style="list-style-type:disc">STP (Shielded Twisted Pair)<ul id="16e8eac6-c6b1-8060-aa9a-ca09145834ef" class="bulleted-list"><li style="list-style-type:circle">설명 : 각 페어가 차폐되어 전자기 간섭(EMI)을 방지.</li></ul><ul id="16e8eac6-c6b1-802b-aa44-ccbd21fb9b64" class="bulleted-list"><li style="list-style-type:circle">특징 : UTP보다 비용이 높지만, 간섭이 많은 환경에서 유리.</li></ul><ul id="16e8eac6-c6b1-8058-a905-d1cf8e448687" class="bulleted-list"><li style="list-style-type:circle">용도 : 산업 환경, 고속 네트워크.</li></ul></li></ul><p id="16e8eac6-c6b1-8002-9a2f-ef46fb60c5d7" class="">
+</p><ul id="16e8eac6-c6b1-8037-8001-c280e43a7153" class="bulleted-list"><li style="list-style-type:disc">FTP (FOiled Twisted Pair)<ul id="16e8eac6-c6b1-800a-abde-e2bb597762cd" class="bulleted-list"><li style="list-style-type:circle">설명 : 전체 케이블에 포일 차폐를 추가하여 간섭을 줄임.</li></ul><ul id="16e8eac6-c6b1-8015-8e57-c5f7d37f65e4" class="bulleted-list"><li style="list-style-type:circle">특징 : STP와 유사하지만 더 앏은 차폐층으로 유연성 유지.</li></ul><ul id="16e8eac6-c6b1-8025-8f21-e55010ef2d37" class="bulleted-list"><li style="list-style-type:circle">용도 : 사무실 환경, 가정용 고속 네트워크.</li></ul></li></ul><p id="16e8eac6-c6b1-809c-86f7-e95122751e30" class="">
+</p><ul id="16e8eac6-c6b1-804f-8d0d-cd4d3e22e722" class="bulleted-list"><li style="list-style-type:disc">광섬유 케이블 (FIber Optic Cable)<ul id="16e8eac6-c6b1-80cd-a40a-e6502b3db084" class="bulleted-list"><li style="list-style-type:circle">설명 : 빛을 통해 데이터를 전송, 전자기 간섭 없음.</li></ul><ul id="16e8eac6-c6b1-801f-bfc5-dc747a6b60f2" class="bulleted-list"><li style="list-style-type:circle">종류 : <ul id="16e8eac6-c6b1-807a-b0ac-ed1644fed285" class="bulleted-list"><li style="list-style-type:square">싱글 모드 : 장거리 전송, 낮은 신호 감쇠.</li></ul><ul id="16e8eac6-c6b1-80b0-8c91-de678987a388" class="bulleted-list"><li style="list-style-type:square">멀티모드 : 단거리 전송, 비용 효율적.</li></ul></li></ul><ul id="16e8eac6-c6b1-805d-9eda-c9b854713086" class="bulleted-list"><li style="list-style-type:circle">용도 : 데이터 센터, 장거리 인터넷.</li></ul></li></ul><p id="16e8eac6-c6b1-80f4-b1a3-e59fb93e3452" class="">
+</p><h2 id="16e8eac6-c6b1-8049-8b89-e8b78d21b74f" class=""> 4. 부호 (Code)</h2><h3 id="16e8eac6-c6b1-8079-939c-f98f6837d04c" class="">정의</h3><ul id="16e8eac6-c6b1-8039-82a9-e6bd42f8011a" class="bulleted-list"><li style="list-style-type:disc">부호 (Code)은 데이터를 전송하기 위해 약속된 기호 체계입니다. 부호는 데이터의 의미를 전달하기 위해 사용되며, 효율적이고 정확한 데이터 전송을 가능하게 합니다.</li></ul><h3 id="16e8eac6-c6b1-8047-88c8-eabe710a8931" class="">목적</h3><ul id="16e8eac6-c6b1-80dd-908a-f3f10cc9524c" class="bulleted-list"><li style="list-style-type:disc">데이터 인코딩 : 데이터를 전기 신호나 광 신호로 변환하여 전송.</li></ul><ul id="16e8eac6-c6b1-806c-b4d3-cf33747aaee6" class="bulleted-list"><li style="list-style-type:disc">오류 검출 및 수정 : 전송 중 발생할 수 있는 오류를 최소화.</li></ul><p id="16e8eac6-c6b1-8081-aa5b-ef5f6c6b1819" class="">
+</p><h3 id="16e8eac6-c6b1-8031-8399-f59610cdf0a8" class="">5. 신호(Signal)</h3><h3 id="16e8eac6-c6b1-8084-9788-c0e8cadccc5e" class="">정의</h3><p id="16e8eac6-c6b1-80ef-b47e-e68cb6cb3201" class="">신호는 데이터를 전달하기 위해 전기적 또는 광학적 형태로 표현된 물리적 매체입니다. 신호는 비트 단위로 데이터를 전송하며, 송신자와 수신자 간의 데이터 교환을 가능하게 합니다.</p><h3 id="16e8eac6-c6b1-80bd-b3ef-eaf9bffd512b" class="">역할</h3><ul id="16e8eac6-c6b1-8002-a691-f7d49bf98e91" class="bulleted-list"><li style="list-style-type:disc">데이터 전달 : 데이터를 송신지에서 수신지로 전달.</li></ul><ul id="16e8eac6-c6b1-80fa-ac32-fd244be0e9f2" class="bulleted-list"><li style="list-style-type:disc">정보 표현 : 데이터를 다양한 신호 형태로 인코딩하여 전송.</li></ul><ul id="16e8eac6-c6b1-80cf-908c-da7ffe3d5b33" class="bulleted-list"><li style="list-style-type:disc">동기화 유지 : 송신자와 수신자 간의 정확한 데이터 전송을 보장.</li></ul><h3 id="16e8eac6-c6b1-8010-a71e-cc4635eb52f6" class="">신호의 종류</h3><ul id="16e8eac6-c6b1-80cb-a7b7-d3003cfad778" class="bulleted-list"><li style="list-style-type:disc">아날로그 신호<ul id="16e8eac6-c6b1-801a-9abb-cee42284cd61" class="bulleted-list"><li style="list-style-type:circle">특징 : 연속적인 파형, 무한한 값 표현 가능.</li></ul><ul id="16e8eac6-c6b1-80f0-bbbf-da44807e647f" class="bulleted-list"><li style="list-style-type:circle">용도 : 라디오 방송.</li></ul></li></ul><ul id="16e8eac6-c6b1-808d-8fcb-d5ae7785a2e8" class="bulleted-list"><li style="list-style-type:disc">디지털 신호 : <ul id="16e8eac6-c6b1-80c0-9643-f7de9b932aca" class="bulleted-list"><li style="list-style-type:circle">특징 : 0과 1로 표현</li></ul><ul id="16e8eac6-c6b1-80f0-9bd0-ea2febab640f" class="bulleted-list"><li style="list-style-type:circle">용도 : 컴퓨터 네트워크, 디지털 통신.</li></ul></li></ul><h2 id="16e8eac6-c6b1-8054-8c07-f68d78ae63b4" class="">6. 신호 전달에 필요한 요소</h2><h3 id="16e8eac6-c6b1-8004-a8cb-f885312c9181" class="">주요 요소</h3><ol type="1" id="16e8eac6-c6b1-809c-a85f-ebc63f39494b" class="numbered-list" start="1"><li>전기 에너지<ul id="16e8eac6-c6b1-80f8-a294-d5e02bc168b5" class="bulleted-list"><li style="list-style-type:disc">역할 : 데이터 전송을 위한 신호 생성 및 전송</li></ul><ul id="16e8eac6-c6b1-80bb-b4e8-df806e1dbe1d" class="bulleted-list"><li style="list-style-type:disc">특징 : 전압, 전류, 주파수 등을 신호의 특성 결정.</li></ul></li></ol><ol type="1" id="16e8eac6-c6b1-80cf-a4ee-c7be9e8dc37e" class="numbered-list" start="2"><li>통신망<ul id="16e8eac6-c6b1-808e-b897-d02dea03d61b" class="bulleted-list"><li style="list-style-type:disc">역할 : 데이터 전송을 위한 물리적 및 논리적 인프라 제공.</li></ul><ul id="16e8eac6-c6b1-8079-bdf7-fc9e4f9b0f9f" class="bulleted-list"><li style="list-style-type:disc">구성 요소 : <ul id="16e8eac6-c6b1-802a-b19b-ce9e392b9f79" class="bulleted-list"><li style="list-style-type:circle">전송 매체 : 케이블, 광섬유, 무선 매체 등.</li></ul><ul id="16e8eac6-c6b1-80c6-93be-e0b19c2fa9f5" class="bulleted-list"><li style="list-style-type:circle">네트워크 장비 : 허브, 스위치, 라우터, 리피터 등</li></ul><ul id="16e8eac6-c6b1-8066-ab93-de682aa0a880" class="bulleted-list"><li style="list-style-type:circle">프로토콜 : 데이터 전송 규약 및 표준.</li></ul></li></ul></li></ol><h3 id="16e8eac6-c6b1-8051-b66a-e8dc9e5d85f9" class="">목적</h3><ul id="16e8eac6-c6b1-8013-96d4-d676f54f6cd4" class="bulleted-list"><li style="list-style-type:disc">효율적인 데이터 전송 : 최소한의 에너지 소모로 최대한의 데이터 전송 효율 달성.</li></ul><ul id="16e8eac6-c6b1-80ae-8830-e469f878f7db" class="bulleted-list"><li style="list-style-type:disc">신뢰성 있는 통신 : 데이터 손실 없이 안정적인 전송 보장.</li></ul><ul id="16e8eac6-c6b1-802a-b9db-caedd9eb059d" class="bulleted-list"><li style="list-style-type:disc">확장성 : 네트워크 확장 시에도 일관된 신호 전달 유지.</li></ul><h2 id="16e8eac6-c6b1-8069-bf1e-fecbb6657c45" class="">7. 리피터</h2><h3 id="16e8eac6-c6b1-8011-902e-f955f07b7032" class="">정의</h3><p id="16e8eac6-c6b1-80c6-be21-dcee62c0f6ea" class="">리피터는 네트워크 신호를 증폭하고 재생하여 신호의 전송 거리를 연장하는 장치입니다. 신호의 감쇠를 보상하고, 데이터 전송의 품질을 유지하는 데 필수적입니다.</p><h3 id="16e8eac6-c6b1-803d-98d9-ddf5f1ce502a" class="">기능</h3><ul id="16e8eac6-c6b1-8044-b8c6-cb37c21b18bd" class="bulleted-list"><li style="list-style-type:disc"><strong>신호 증폭</strong>: 약해진 신호를 강하게 재생하여 전송 거리 확장.</li></ul><ul id="16e8eac6-c6b1-80c4-8583-e6e2c1121164" class="bulleted-list"><li style="list-style-type:disc"><strong>신호 재생</strong>: 수신된 신호를 원래의 형태로 복원하여 재전송.</li></ul><ul id="16e8eac6-c6b1-801a-a650-ebcdbfe6f8ef" class="bulleted-list"><li style="list-style-type:disc"><strong>에러 최소화</strong>: 전송 중 발생한 일부 신호 손실을 복구.</li></ul><h3 id="16e8eac6-c6b1-809c-b516-d1bf33a87236" class="">사용 사례</h3><ul id="16e8eac6-c6b1-80ef-a84a-ebb4652b9ce3" class="bulleted-list"><li style="list-style-type:disc">장거리 이더넷 연결 </li></ul><ul id="16e8eac6-c6b1-808f-85a2-ee370729a9f1" class="bulleted-list"><li style="list-style-type:disc">광섬유 네트워크</li></ul><ul id="16e8eac6-c6b1-80ac-aa45-f93fb2fe7da8" class="bulleted-list"><li style="list-style-type:disc">무선 통신 네트워크</li></ul><h3 id="16e8eac6-c6b1-8058-b4f5-c096f0a80b82" class="">주의 사항</h3><ul id="16e8eac6-c6b1-80f0-826a-c01f5654c07a" class="bulleted-list"><li style="list-style-type:disc">리피터를 여러개 사용할 경우 신호 지연 가능</li></ul><h2 id="16e8eac6-c6b1-80c8-b2f1-f0d93c49ae58" class="">8. 허브</h2><h3 id="16e8eac6-c6b1-8006-87d3-e8f2076c13a1" class="">정의</h3><p id="16e8eac6-c6b1-80a2-83ab-e95e720dba71" class="">허브는 는 네트워크 장치들을 물리적으로 연결하고, 데이터를 모든 포트로 중계하는 기본적인 네트워크 장비입니다. 주로 LAN(Local Area Network) 환경에서 사용됩니다.</p><h3 id="16e8eac6-c6b1-807e-9efe-c3fcad0aa6a5" class="">기능</h3><ul id="16e8eac6-c6b1-8090-8621-ebde1327076f" class="bulleted-list"><li style="list-style-type:disc"><strong>데이터 중계</strong>: 입력 포트로 들어온 데이터를 모든 출력 포트로 전송.</li></ul><ul id="16e8eac6-c6b1-802d-9856-ea01416ae8e5" class="bulleted-list"><li style="list-style-type:disc"><strong>장치 연결</strong>: 여러 네트워크 장치를 하나의 네트워크로 연결.</li></ul><ul id="16e8eac6-c6b1-8081-bd1c-c2b84045ff98" class="bulleted-list"><li style="list-style-type:disc"><strong>브로드캐스트 전송</strong>: 수신된 데이터를 모든 포트로 전송하여 데이터 공유.</li></ul><h2 id="16e8eac6-c6b1-80cc-92ad-caef45aab3a9" class="">특징</h2><ul id="16e8eac6-c6b1-805c-b60e-f88f93a2f522" class="bulleted-list"><li style="list-style-type:disc"><strong>단순한 구조</strong>: 관리 기능이 없고, 모든 데이터를 모든 포트로 전송.</li></ul><ul id="16e8eac6-c6b1-80a3-98be-f29039f28a78" class="bulleted-list"><li style="list-style-type:disc"><strong>저비용</strong>: 스위치나 라우터에 비해 저렴한 비용.</li></ul><h2 id="16e8eac6-c6b1-8094-bd3e-cb6d8bc1faf5" class="">허브 / 스위치</h2><ul id="16e8eac6-c6b1-8001-bb1b-ee434907c599" class="bulleted-list"><li style="list-style-type:disc">허브 :<ul id="16e8eac6-c6b1-808c-801c-d2666b058883" class="bulleted-list"><li style="list-style-type:circle">단순하고 저렴.</li></ul><ul id="16e8eac6-c6b1-8065-b1c5-c89d64d3b716" class="bulleted-list"><li style="list-style-type:circle">모든 포트로 데이터 전송</li></ul></li></ul><ul id="16e8eac6-c6b1-801d-86cd-f8bd1095f0a2" class="bulleted-list"><li style="list-style-type:disc">스위치 :<ul id="16e8eac6-c6b1-80ae-a5ab-dd95f2d559aa" class="bulleted-list"><li style="list-style-type:circle">더 높은 비용.</li></ul><ul id="16e8eac6-c6b1-8062-89cc-d20957054c10" class="bulleted-list"><li style="list-style-type:circle">각 포트가 개별적인 충돌 도메인</li></ul><ul id="16e8eac6-c6b1-80ba-9769-eb63299ea563" class="bulleted-list"><li style="list-style-type:circle"></li></ul></li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
