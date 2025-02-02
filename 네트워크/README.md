@@ -7,3 +7,7 @@ Link : [1.물리계층](https://www.notion.so/16e8eac6c6b180998025d52b97ab7d81?p
 Link : [2.데이터링크 계층](https://www.notion.so/16e8eac6c6b180d29059dd5b13d76326?pvs=4)
 
 Link : [3.네트워크 계층](https://www.notion.so/1728eac6c6b1800aab88d8130afa4c12?pvs=4)
+
+Link : [4.전송 계층](https://www.notion.so/1728eac6c6b180f0b8afe89383d911fd?pvs=4)
+
+
